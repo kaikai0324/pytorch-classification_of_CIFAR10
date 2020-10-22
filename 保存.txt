@@ -1,0 +1,254 @@
+%%%%%%%% ICML 2019 EXAMPLE LATEX SUBMISSION FILE %%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+
+
+% Recommended, but optional, packages for figures and better typesetting:
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{booktabs} % for professional tables
+
+% hyperref makes hyperlinks in the resulting PDF.
+% If your build breaks (sometimes temporarily if a hyperlink spans a page)
+% please comment out the following usepackage line and replace
+% \usepackage{icml2019} with \usepackage[nohyperref]{icml2019} above.
+\usepackage{hyperref}
+
+% Attempt to make hyperref and algorithmic work together better:
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Use the following line for the initial blind version submitted for review:
+\usepackage{icml2019}
+
+% If accepted, instead use the following line for the camera-ready submission:
+%\usepackage[accepted]{icml2019}
+
+% The \icmltitle you define below is probably too long as a header.
+% Therefore, a short form for the running title is supplied here:
+\icmltitlerunning{Submission and Formatting Instructions for ICML 2019}
+
+\begin{document}
+
+\twocolumn[
+\icmltitle{Classification and recognization of RGB images using Pytorch}   
+
+\eauthor{
+    \textbf{Kai He}\thanks{Northeastern University} and
+    \textbf{Jin Dai}\thanks{Northeastern University}and
+   \textbf{ Ruiyue Wang}\thanks{Northeastern University} and
+    \textbf{Mengyue Duan}\thanks{Northeastern University}}
+% It is OKAY to include author information, even for blind
+% submissions: the style file will automatically remove it for you
+% unless you've provided the [accepted] option to the icml2019
+% package.
+
+% List of affiliations: The first argument should be a (short)
+% identifier you will use later to specify author affiliations
+% Academic affiliations should list Department, University, City, Region, Country
+% Industry affiliations should list Company, City, Region, Country
+
+
+% You can specify symbols, otherwise they are numbered in order.
+% Ideally, you should not use this facility. Affiliations will be numbered
+% in order of appearance and this is the preferred way.
+
+
+\icmlaffiliation{to}{Department of Computation, University of Torontoland, Torontoland, Canada}
+\icmlaffiliation{goo}{Googol ShallowMind, New London, Michigan, USA}
+\icmlaffiliation{ed}{School of Computation, University of Edenborrow, Edenborrow, United Kingdom}
+
+\icmlcorrespondingauthor{Cieua Vvvvv}{c.vvvvv@googol.com}
+\icmlcorrespondingauthor{Eee Pppp}{ep@eden.co.uk}
+
+% You may provide any keywords that you
+% find helpful for describing your paper; these are used to populate
+% the "keywords" metadata in the PDF but will not be shown in the document
+\icmlkeywords{Machine Learning, ICML}
+
+\vskip 0.3in
+]
+
+% this must go after the closing bracket ] following \twocolumn[ ...
+
+% This command actually creates the footnote in the first column
+% listing the affiliations and the copyright notice.
+% The command takes one argument, which is text to display at the start of the footnote.
+% The \icmlEqualContribution command is standard text for equal contribution.
+% Remove it (just {}) if you do not need this facility.
+
+%\printAffiliationsAndNotice{}  % leave blank if no need to mention equal contribution
+\printAffiliationsAndNotice{\icmlEqualContribution} % otherwise use the standard text.
+
+\begin{abstract}
+In today's society, machine learning is already everywhere in our life. Classification and recognition of images are often realized by machine learning. This project is base on the classification and recognization of 32*32*3 RGB images in CIFAR10 dataset. There are 10 class in CIFAR10 dataset,  During the project, we use neural network, Convolutional Neural Networks (CNN) implementation process, and corresponding Stochastic Gradient Descent algorithm to realize the classification. We alse change the learning-rate(stepsize) and MOMENTUM of SGD to optimize the accuracy of classification.
+\end{abstract}
+
+\section{Instruction}
+\label{submission}
+
+The implementation process of this project is to first select a batch in CIFAR as the training set, with a total of 10,000 pictures. Then convolution neural network is established and trained. SGD is used to optimize the model, and the better parameters of neural network are selected to complete the training of classifier. Furthermore, we randomly selected 5 pictures from the 10000 pictures in the test set to test the effect of the classifier and output them. Finally, all the pictures of all the test sets are used for testing, and the classification accuracy of the classifier for 10 class is obtained, and the comprehensive accuracy is calculated. After the first test, in order to optimize the classifier to improve the classification accuracy, we changed SGD's learning rate and MOMENTUM parameters and increased the number of training.
+
+
+\section{CIFAR10 dataset}
+
+CIFAR-10 data set consists of 10 types of 32*32*3 color pictures, with a total of 60000 pictures, each type containing 6000 pictures. Among them, 50,000 pictures were used as training set and 10,000 pictures were used as test set.
+
+CIFAR-10 data set is divided into 5 training batches and 1 testing batch, each batch contains 10000 pictures. The pictures in the test set batch are composed of 1,000 pictures randomly selected from each category, and the training set batch contains the remaining 50,000 pictures in random order. However, some training sets batch may contain more pictures of one category than other categories. The training set batch contains 5,000 pictures from each category, totaling 50,000 training pictures.
+
+\begin{figure}[h]   % 必须要有[h]否则插入的图片都在文字前面
+    \centering  % 图像居中
+    \includegraphics[width=8cm]{outputsample}   %[]里可以指定影像大小
+    \caption{outputsample}    % 图名
+    \label{outputsample}  % 用于内部引用的图名
+\end{figure}
+
+
+
+\section{Convolution Neural Networks}
+\label{submission}
+
+\begin{figure}[h]   % 必须要有[h]否则插入的图片都在文字前面
+    \centering  % 图像居中
+    \includegraphics[width=8cm]{CNN2}   %[]里可以指定影像大小
+    \caption{An example of convolution neural network with 32x32x3 picture}    % 图名
+    \label{CNN2}  % 用于内部引用的图名
+\end{figure}
+CNN is a method which is most commonly used in analysing visual imagery. Convolution network are the neural network that use convolution instead of general matrix multiplication in each layer.
+When giving a picture, a CNN will do the following steps: 
+1.Use a wanted method, such as PCA, moving-mean to process the image and use the wanted data as input layer of the CNN.
+2.Do convolution in each layer.
+3.Use Relu as activation function between each convolution layer.
+4.Pooling. 
+5.Fully connected.
+
+
+In image processing, a convolution step is to take the inner product of the input data and the filter. For example, for a picture, using a 3x3 filter, the convolution of the first 3x3 matrix of source and the filter is:
+
+\begin{figure}[h]   % 必须要有[h]否则插入的图片都在文字前面
+    \centering  % 图像居中
+    \includegraphics[width=8cm]{CNN1}   %[]里可以指定影像大小
+    \caption{convolution of 3x3 matrix and filter}    % 图名
+    \label{CNN1}  % 用于内部引用的图名
+\end{figure}
+
+
+The result of the whole layer after convolution is called ‘features’. Then an activation function is needed to connect between every layer in CNN. In convolution neural network ReLU function is usually chosen as the activation function instead of sigmoid. The ReLU function has the advantage of fast convergence and simple to calculate gradient.
+Pooling is a method of reducing dimension. it means taking the maximum or average value of an area. For example, for a 4x4 matrix which is divided into four parts, the result of applying pooling is:
+
+\begin{figure}[h]   % 必须要有[h]否则插入的图片都在文字前面
+    \centering  % 图像居中
+    \includegraphics[width=8cm]{CNN3}   %[]里可以指定影像大小
+    \caption{pooling}    % 图名
+    \label{CNN3}  % 用于内部引用的图名
+\end{figure}
+
+In this project, the pictures in the library are all 32x32x3 in size. The three dimensions of the picture are divided into three different 32x32x1 matrixes, and then perform convolution separately. There are three inputs for each picture and 6 outputs (6 different classes) in this project. The filter size is chosen as 5x5. The convolution neural network can be constructed by library of pytorch as follow:
+
+\begin{figure}[h]   % 必须要有[h]否则插入的图片都在文字前面
+    \centering  % 图像居中
+    \includegraphics[width=8cm]{CNN4}   %[]里可以指定影像大小
+    \caption{Achieve CNN using pytorch library}    % 图名
+    \label{CNN4}  % 用于内部引用的图名
+\end{figure}
+
+Fully connected layers has  the same principle as traditional multi-layer perceptron neural network. It connects every neuron in one layer to every neuron in another layer.
+
+For the 32x32 picture, 2 convolution layers and 2 pooling layers are used before fully connected layer. 
+In fully connected layer 1, the input is a 16x5x5 source and we set the number of weight as 120. The number of parameters of second and third fully connected layer are set as 84 and 10. Note that when the total number of parameters in fully connected layer increase, the performance of the model will increase. But a too large number of parameters will reduce the computational efficiency of the model. 
+
+
+Ian Goodfellow and Yoshua Bengio and Aaron Courville (2016). Deep Learning. MIT Press. p. 326.
+
+
+\section{Stochastic gradient descent}
+
+\label{submission}
+
+As the batch gradient descent(normal gradient descent) method needs all training samples when updating each parameter, the training process will become abnormally slow with the increase of the number of samples. Stochastic Gradient Descent (SGD) is proposed to solve the problem of batch gradient descent.
+Random gradient descent is updated iteratively through each sample. If the sample size is large (e.g., hundreds of thousands), theta may have been iterated to the optimal solution using only tens of thousands or thousands of samples. Compared with the above batch gradient descent, one iteration requires more than 100,000 training samples, one iteration cannot be optimal, and 10 iterations require traversing the training samples. However, one of the problems associated with SGD is that the noise is more than BGD, which makes SGD not go toward the overall optimization direction every iteration.
+
+\begin{figure}[h]   % 必须要有[h]否则插入的图片都在文字前面
+    \centering  % 图像居中
+    \includegraphics[width=8cm]{SGD Algorithm}   %[]里可以指定影像大小
+    \caption{SGD Algorithm}    % 图名
+    \label{SGD Algorithm}  % 用于内部引用的图名
+\end{figure}
+
+\begin{figure}[h]   % 必须要有[h]否则插入的图片都在文字前面
+    \centering  % 图像居中
+    \includegraphics[width=8cm]{SGD}   %[]里可以指定影像大小
+    \caption{SGD}    % 图名
+    \label{SGD}  % 用于内部引用的图名
+\end{figure}
+The derivative of the loss function and the loss function are obtained by the back propagation algorithm of the neural network.
+
+Defect of SGD: Very slow progress along shallow dimension, jitter along steep direction. Going to local minimum or saddle point will result in gradient being 0 and cannot be moved. In fact, saddle point problem is more common in high-dimensional problems.
+
+Advantages of SGD: Fast training speed.
+\section{Experimental results}
+\label{submission}
+
+In the experiment, we try to change the training times, learning rate, and MOMENTUM to get the best accuracy of the classification.
+The learning rate represents the step size of the function at any time during each repeat. When learning rate is smaller, we will have more chance to get the lower cost function. But we will spend more training times to arrive global smaller value.
+
+Momentum update
+
+v = mu * v - learning_rate * dx
+x + v = v 
+
+
+A variable V initialized to 0 and a super parameter mu are introduced here. It is inappropriate to say that this variable (mu) is regarded as momentum in the optimization process (the general value is set to 0.9), but its physical meaning is more consistent with the friction coefficient ρ. This variable effectively suppresses the speed and reduces the kinetic energy of the system, otherwise the particle will never stop at the bottom of the mountain. This parameter is usually set to one of [0.5,0.9,0.95,0.99].
+
+Training tims: With the appropriate learning rate and MOMENTUM set, the The more times you train, the closer it is to global minimum.
+
+\begin{figure}[h]   % 必须要有[h]否则插入的图片都在文字前面
+    \centering  % 图像居中
+    \includegraphics[width=8cm]{finalxunlian}   %[]里可以指定影像大小
+    \caption{Accuracy:0.64  training times:15  lr:0.0005  momentum:0.9}    % 图名
+    \label{finalxunlian}  % 用于内部引用的图名
+\end{figure}
+
+\begin{figure}[h]   % 必须要有[h]否则插入的图片都在文字前面
+    \centering  % 图像居中
+    \includegraphics[width=8cm]{15yangli}   %[]里可以指定影像大小
+    \caption{5picture of test}    % 图名
+    \label{15yangli}  % 用于内部引用的图名
+\end{figure}
+
+
+Other examples:
+
+Accuracy:0.31   training times:2  lr:0.01  momentum:0.9.
+
+Accuracy:0.58   training times:4  lr:0.001  momentum:0.9.
+
+Accuracy:0.60   training times:15  lr:0.001  momentum:0.9.
+
+Accuracy:0.64   training times:15  lr:0.0005  momentum:0.9.
+
+When we choose big learning rate and training a few times,  Accuracy of classification is very low. And as we increase the training times and decrease the learning rate, Accuracy of classification is more and more high. 
+Limited by the configuration of computer hardware and other issues (such as without GPU, and cannot work with multiple threads), we can not train hundred or thousand times and set the learning rate very small, like 0.00001, and set momentum 0.99. When we realize that operation, the accuracy of classifer will be far greater than than 0.64.
+
+% Acknowledgements should only appear in the accepted version.
+\section*{Acknowledgements}
+Thanks to Professor Erdogmus for the support and instruction.
+
+
+
+% In the unusual situation where you want a paper to appear in the
+% references without citing it in the main text, use \nocite
+\nocite{langley00}
+
+\bibliography{example_paper}
+\bibliographystyle{icml2019}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DELETE THIS PART. DO NOT PLACE CONTENT AFTER THE REFERENCES!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
